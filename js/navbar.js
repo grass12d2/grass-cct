@@ -32,6 +32,7 @@
         { id: 'vigenere-ctkey', name: 'Vigenère Ciphertext', path: '/pages/vigenere-ctkey.html', icon: 'fa-lock-open', color: 'cyan', desc: 'Gamma = Khoá + Bản mã' },
         { id: 'cardano', name: 'Cardan Grille (hình vuông)', path: '/pages/cardano.html', icon: 'fa-border-all', color: 'violet', desc: 'Lưới khoét xoay 4 vị trí' },
         { id: 'cardano-rect', name: 'Cardan Grille (hình chữ nhật)', path: '/pages/cardano-rect.html', icon: 'fa-table-cells-large', color: 'emerald', desc: 'Lưới chữ nhật — 24 thứ tự' },
+        { id: 'playfair', name: 'Playfair', path: '/pages/playfair.html', icon: 'fa-clone', color: 'blue', desc: 'Mã hoá cặp ký tự 5×6' },
     ];
 
     let isInPages = false;
