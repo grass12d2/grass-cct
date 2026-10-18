@@ -432,13 +432,20 @@ function updateCTKeyInfo(key) {
     normalizedKey = normalizedKey.replace(/[^А-Я]/g, '');
     if (normalizedKey.length === 0) normalizedKey = 'А';
 
-    const keyDisplay = normalizedKey.length > 20 ? normalizedKey.slice(0, 20) + '...' : normalizedKey;
+    const keyDisplay = normalizedKey.length > 25
+        ? normalizedKey.slice(0, 25) + '…'
+        : normalizedKey;
+
     container.innerHTML = `
-        <div class="flex flex-wrap items-center gap-3 text-sm">
-            <span class="font-medium text-gray-700 dark:text-gray-300"><i class="fas fa-key text-cyan-500 mr-1"></i>Khoá ban đầu:</span>
-            <span class="font-mono font-bold text-cyan-600 dark:text-cyan-400">${keyDisplay}</span>
-            <span class="text-gray-500 dark:text-gray-400">(${normalizedKey.length} ký tự)</span>
-            <span class="text-xs text-gray-600 dark:text-gray-300 bg-cyan-100 dark:bg-cyan-900/30 px-2 py-1 rounded">
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm min-w-0">
+            <span class="font-medium text-gray-700 dark:text-gray-300 shrink-0">
+                <i class="fas fa-key text-cyan-500 mr-1"></i>Khoá ban đầu:
+            </span>
+            <span class="font-mono font-bold text-cyan-600 dark:text-cyan-400 break-all min-w-0">
+                ${keyDisplay}
+            </span>
+            <span class="text-gray-500 dark:text-gray-400 shrink-0">(${normalizedKey.length} ký tự)</span>
+            <span class="text-xs text-gray-600 dark:text-gray-300 bg-cyan-100 dark:bg-cyan-900/30 px-2 py-1 rounded max-w-full break-words">
                 Gamma = Khoá + Bản mã
             </span>
         </div>

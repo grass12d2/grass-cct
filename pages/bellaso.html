@@ -66,7 +66,7 @@
 
             <!-- Key Info -->
             <div id="key-info"
-                class="flex items-center gap-3 text-sm p-3 bg-pink-100 dark:bg-gray-800 rounded-lg border border-pink-200 dark:border-gray-700">
+                class="flex flex-wrap items-center gap-3 text-sm p-3 bg-pink-100 dark:bg-gray-800 rounded-lg border border-pink-200 dark:border-gray-700 min-w-0 overflow-hidden">
                 <span class="font-medium text-gray-700 dark:text-gray-300"><i
                         class="fas fa-key text-pink-500 mr-2"></i>Khoá:</span>
                 <span class="font-mono font-bold text-pink-600 dark:text-pink-400">ТРАВА</span>
@@ -89,8 +89,8 @@
                             </button>
                         </div>
                     </div>
-                    <textarea id="bellaso-input" class="input-area" spellcheck="false" autocorrect="off" autocapitalize="off"
-                        placeholder="Nhập văn bản tiếng Nga (ví dụ: ПРИВЕТ)"></textarea>
+                    <textarea id="bellaso-input" class="input-area" spellcheck="false" autocorrect="off"
+                        autocapitalize="off" placeholder="Nhập văn bản tiếng Nga (ví dụ: ПРИВЕТ)"></textarea>
                 </div>
                 <div>
                     <div class="flex items-center justify-between mb-2">
@@ -106,8 +106,8 @@
                             </button>
                         </div>
                     </div>
-                    <textarea id="bellaso-output" class="input-area" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="Kết quả sẽ hiển thị ở đây"
-                        readonly></textarea>
+                    <textarea id="bellaso-output" class="input-area" spellcheck="false" autocorrect="off"
+                        autocapitalize="off" placeholder="Kết quả sẽ hiển thị ở đây" readonly></textarea>
                 </div>
             </div>
 
@@ -116,9 +116,8 @@
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
                         <i class="fas fa-table text-pink-500 mr-2"></i>Bảng mã hoá Bellaso
-                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">
-                            <span id="view-mode-label" class="text-purple-600 dark:text-purple-400">(Ngang)</span>
-                        </span>
+                        <span id="view-mode-label"
+                            class="text-sm font-normal text-gray-500 dark:text-gray-400 whitespace-nowrap ml-2">(Ngang)</span>
                     </h2>
                     <button id="view-toggle"
                         class="view-toggle-btn px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg text-xs font-medium transition-colors">
