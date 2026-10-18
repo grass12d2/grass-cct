@@ -341,7 +341,7 @@
                                 một cặp —
                                 giống Playfair hiện đại. Mặc định tắt.
                             </div>
-                            <div class="absolute top-full right-2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px]
+                            <div id="modern-filler-tooltip-arrow" class="absolute top-full right-2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px]
                     border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
                         </div>
                     </div>
@@ -389,10 +389,10 @@
 
             <!-- ===== Grid ===== -->
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-4">
-                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                    <i class="fas fa-table-cells text-blue-500 mr-2"></i>Lưới Playfair 5×6
-                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(30 ký tự — bỏ Ё, Й,
-                        Ъ)</span>
+                <h2 class="flex flex-wrap items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    <i class="fas fa-table-cells text-blue-500"></i>
+                    <span>Bảng Playfair 5×6</span>
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">(30 ký tự — bỏ Ё, Й, Ъ)</span>
                 </h2>
                 <div id="playfair-grid-display"></div>
             </div>
@@ -401,11 +401,13 @@
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-4">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        <i class="fas fa-play-circle text-blue-500 mr-2"></i>Hoạt ảnh mã hoá theo cặp
+                        <i class="fas fa-play-circle text-blue-500 mr-2"></i>Hoạt ảnh mã hoá
                     </h2>
                     <button id="anim-reset" type="button"
-                        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors shadow-md">
-                        <i class="fas fa-rotate-left mr-1"></i> Reset
+                        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors shadow-md"
+                        aria-label="Reset hoạt ảnh">
+                        <i class="fas fa-rotate-left sm:mr-1"></i>
+                        <span class="hidden sm:inline">Reset</span>
                     </button>
                 </div>
 
@@ -427,12 +429,14 @@
                     <button id="anim-back-10" type="button"
                         class="px-3 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         title="Lùi 10 bước">
-                        <i class="fas fa-backward-fast mr-1"></i>-10
+                        <i class="fas fa-backward-fast sm:mr-1"></i>
+                        <span class="hidden sm:inline">-10</span>
                     </button>
                     <button id="anim-back-1" type="button"
                         class="px-3 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         title="Lùi 1 bước">
-                        <i class="fas fa-step-backward mr-1"></i>-1
+                        <i class="fas fa-step-backward sm:mr-1"></i>
+                        <span class="hidden sm:inline">-1</span>
                     </button>
                     <button id="anim-play-pause" type="button"
                         class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-bold transition-colors shadow-md disabled:opacity-40 disabled:cursor-not-allowed min-w-[52px]"
@@ -442,15 +446,19 @@
                     <button id="anim-forward-1" type="button"
                         class="px-3 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         title="Tiến 1 bước">
-                        +1 <i class="fas fa-step-forward ml-1"></i>
+                        <span class="hidden sm:inline mr-1">+1</span>
+                        <i class="fas fa-step-forward"></i>
                     </button>
                     <button id="anim-forward-10" type="button"
                         class="px-3 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         title="Tiến 10 bước">
-                        +10 <i class="fas fa-forward-fast ml-1"></i>
+                        <span class="hidden sm:inline mr-1">+10</span>
+                        <i class="fas fa-forward-fast"></i>
                     </button>
 
-                    <div class="flex items-center gap-1 ml-2 border-l border-gray-300 dark:border-gray-600 pl-2">
+                    <div class="flex items-center gap-1 ml-6">
+                        <span class="text-sm font-medium text-gray-600 dark:text-gray-400 whitespace-nowrap mr-2">Tốc
+                            độ</span>
                         <button id="anim-speed-down" type="button"
                             class="px-2 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors"
                             title="Giảm tốc độ">

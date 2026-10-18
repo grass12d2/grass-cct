@@ -758,11 +758,49 @@ document.addEventListener('DOMContentLoaded', function () {
     // ===== Tooltip popover cho icon info =====
     const infoBtn = document.getElementById('modern-filler-info');
     const tooltip = document.getElementById('modern-filler-tooltip');
+    const tooltipArrow = document.getElementById('modern-filler-tooltip-arrow');
+
     if (infoBtn && tooltip) {
         let pinned = false;
 
-        const showTooltip = () => tooltip.classList.remove('hidden');
-        const hideTooltip = () => tooltip.classList.add('hidden');
+        function positionTooltip() {
+            if (!tooltip || tooltip.classList.contains('hidden')) return;
+
+            // Reset về trạng thái mặc định trước khi đo
+            tooltip.style.transform = '';
+            if (tooltipArrow) tooltipArrow.style.right = '';
+
+            const margin = 12;
+            const tRect = tooltip.getBoundingClientRect();
+            const vWidth = window.innerWidth;
+
+            let shift = 0;
+            if (tRect.left < margin) {
+                // Tràn lề trái → đẩy sang phải
+                shift = margin - tRect.left;
+            } else if (tRect.right > vWidth - margin) {
+                // Tràn lề phải → đẩy sang trái
+                shift = vWidth - margin - tRect.right;
+            }
+
+            if (shift !== 0) {
+                tooltip.style.transform = `translateX(${shift}px)`;
+                // Giữ mũi tên nhọn trỏ về icon (bù lại độ dịch)
+                if (tooltipArrow) {
+                    tooltipArrow.style.right = `${8 + shift}px`;
+                }
+            }
+        }
+
+        const showTooltip = () => {
+            tooltip.classList.remove('hidden');
+            requestAnimationFrame(positionTooltip);
+        };
+        const hideTooltip = () => {
+            tooltip.classList.add('hidden');
+            tooltip.style.transform = '';
+            if (tooltipArrow) tooltipArrow.style.right = '';
+        };
 
         // Hover: hiện/ẩn (nếu chưa pin)
         infoBtn.addEventListener('mouseenter', showTooltip);
@@ -785,6 +823,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 hideTooltip();
             }
         });
+
+        // Reposition khi resize hoặc scroll
+        window.addEventListener('resize', () => {
+            if (!tooltip.classList.contains('hidden')) positionTooltip();
+        });
+        window.addEventListener('scroll', () => {
+            if (!tooltip.classList.contains('hidden')) positionTooltip();
+        }, { passive: true });
     }
 
     if (input) {
