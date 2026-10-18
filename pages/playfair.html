@@ -389,12 +389,14 @@
 
             <!-- ===== Grid ===== -->
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 p-4">
-                <h2 class="flex flex-wrap items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                    <i class="fas fa-table-cells text-blue-500"></i>
-                    <span>Bảng Playfair 5×6</span>
-                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">(30 ký tự — bỏ Ё, Й, Ъ)</span>
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    <i class="fas fa-table-cells text-blue-500 mr-2"></i>Bảng Playfair 5×6
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400 whitespace-nowrap ml-2">(30 ký tự
+                        — bỏ Ё, Й, Ъ)</span>
                 </h2>
-                <div id="playfair-grid-display"></div>
+                <div class="overflow-x-auto -mx-4 px-4">
+                    <div id="playfair-grid-display"></div>
+                </div>
             </div>
 
             <!-- ===== Animation ===== -->

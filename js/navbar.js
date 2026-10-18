@@ -122,7 +122,10 @@
         panel.style.opacity = '1';
         panel.style.transform = toTransform;
 
-        setTimeout(() => input && input.focus(), 60);
+        // Chỉ auto-focus trên desktop — mobile để user tap vào mới hiện bàn phím
+        if (window.innerWidth >= 768) {
+            setTimeout(() => input && input.focus(), 60);
+        }
     }
 
     function closeSearch() {
@@ -190,7 +193,7 @@
                             <span class="block text-base font-semibold text-gray-900 dark:text-white">${a.name}</span>
                             <span class="block text-sm text-gray-500 dark:text-gray-400 truncate">${a.desc}</span>
                         </span>
-                        <i class="fas fa-arrow-right text-sm text-gray-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"></i>
+                        <i class="search-result-arrow fas fa-arrow-right text-sm text-gray-400 opacity-0 transition-opacity duration-150"></i>
                     </a>
                 </li>
             `;
@@ -206,13 +209,17 @@
         if (!results) return;
         const items = results.querySelectorAll('.search-result-item');
         items.forEach((item, i) => {
-            if (i === searchState.selectedIndex) {
+            const isSelected = i === searchState.selectedIndex;
+            const hasBg = item.classList.contains('bg-amber-50');
+            const arrow = item.querySelector('.search-result-arrow');
+
+            if (isSelected && !hasBg) {
                 item.classList.add('bg-amber-50', 'dark:bg-gray-700/50');
-                if (shouldScroll) {
-                    item.scrollIntoView({ block: 'nearest' });
-                }
-            } else {
+                if (arrow) arrow.classList.remove('opacity-0');
+                if (shouldScroll) item.scrollIntoView({ block: 'nearest' });
+            } else if (!isSelected && hasBg) {
                 item.classList.remove('bg-amber-50', 'dark:bg-gray-700/50');
+                if (arrow) arrow.classList.add('opacity-0');
             }
         });
     }
@@ -320,7 +327,7 @@
         const navbarPh = document.getElementById('navbar-placeholder');
         if (navbarPh) {
             // Đổi version này MỖI KHI sửa components/navbar.html
-            const NAVBAR_CACHE_VERSION = 'v2';
+            const NAVBAR_CACHE_VERSION = 'v5';
 
             let cachedHtml = null;
             try {
