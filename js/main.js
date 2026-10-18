@@ -365,7 +365,7 @@ function handleTextInputWithCursor(textarea, showAlert = true) {
 
 // ==================== EXPORT ====================
 
-window.GrassEAD = {
+window.GrassCCT = {
     normalizeRussianText,
     processInput,
     formatResult,

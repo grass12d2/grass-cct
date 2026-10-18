@@ -1,8 +1,8 @@
 function atbash(text) {
-    const processed = GrassEAD.processInput(text);
+    const processed = GrassCCT.processInput(text);
     let result = '';
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
-    const lower = GrassEAD.RUSSIAN_ALPHABET_LOWER;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
+    const lower = GrassCCT.RUSSIAN_ALPHABET_LOWER;
     const len = upper.length;
 
     for (let char of processed) {
@@ -26,11 +26,11 @@ function getDetailItems() {
     const text = input.value;
     if (!text || text.trim() === '') return [];
 
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     const len = upper.length;
     const items = [];
 
-    const processed = GrassEAD.processInput(text);
+    const processed = GrassCCT.processInput(text);
     for (let char of processed) {
         if (char === ' ') continue;
         if (upper.includes(char)) {
@@ -198,7 +198,7 @@ function renderAtbashTableHorizontal(isDecrypt = false) {
     const container = document.getElementById('atbash-table');
     if (!container) return;
 
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     const len = upper.length;
     const chars = upper.split('');
 
@@ -282,7 +282,7 @@ function renderAtbashTableVertical(isDecrypt = false) {
     const container = document.getElementById('atbash-table');
     if (!container) return;
 
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     const len = upper.length;
     const chars = upper.split('');
 
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleInput(event) {
-        GrassEAD.handleTextInputWithCursor(event.target, true);
+        GrassCCT.handleTextInputWithCursor(event.target, true);
         updateOutput();
     }
 
@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let result;
         if (currentMode === 'encrypt') {
             result = atbash(text);
-            result = GrassEAD.formatResult(result);
+            result = GrassCCT.formatResult(result);
         } else {
             const cleanText = text.replace(/\s/g, '');
             result = atbash(cleanText);
@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('input', handleInput);
         input.addEventListener('paste', function (e) {
             setTimeout(() => {
-                GrassEAD.handleTextInputWithCursor(this, true);
+                GrassCCT.handleTextInputWithCursor(this, true);
                 updateOutput();
             }, 10);
         });
@@ -494,21 +494,21 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pasteBtn) {
         pasteBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.pasteText(input);
+            GrassCCT.pasteText(input);
         });
     }
 
     if (copyInputBtn) {
         copyInputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(input.value);
+            GrassCCT.copyText(input.value);
         });
     }
 
     if (copyOutputBtn) {
         copyOutputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(output.value);
+            GrassCCT.copyText(output.value);
         });
     }
 
@@ -521,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (output) {
                 output.value = '';
             }
-            GrassEAD.showMessage('Đã xoá nội dung!', 'info');
+            GrassCCT.showMessage('Đã xoá nội dung!', 'info');
             updateOutput();
         });
     }

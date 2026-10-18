@@ -1,8 +1,8 @@
 function caesarEncrypt(text, shift = 3) {
-    const processed = GrassEAD.processInput(text);
+    const processed = GrassCCT.processInput(text);
     let result = '';
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
-    const lower = GrassEAD.RUSSIAN_ALPHABET_LOWER;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
+    const lower = GrassCCT.RUSSIAN_ALPHABET_LOWER;
     const len = upper.length;
     shift = ((shift % len) + len) % len;
 
@@ -31,11 +31,11 @@ function getDetailItems() {
     const text = input.value;
     if (!text || text.trim() === '') return [];
 
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     const len = upper.length;
     const items = [];
 
-    const processed = GrassEAD.processInput(text);
+    const processed = GrassCCT.processInput(text);
     const shift = currentShift;
 
     for (let char of processed) {
@@ -248,7 +248,7 @@ function renderCaesarTableHorizontal(shift, isDecrypt = false) {
     const container = document.getElementById('caesar-table');
     if (!container) return;
 
-    const chars = GrassEAD.RUSSIAN_ALPHABET.split('');
+    const chars = GrassCCT.RUSSIAN_ALPHABET.split('');
     const len = chars.length;
     const displayShift = shift;
 
@@ -330,7 +330,7 @@ function renderCaesarTableVertical(shift, isDecrypt = false) {
     const container = document.getElementById('caesar-table');
     if (!container) return;
 
-    const chars = GrassEAD.RUSSIAN_ALPHABET.split('');
+    const chars = GrassCCT.RUSSIAN_ALPHABET.split('');
     const len = chars.length;
     const displayShift = shift;
 
@@ -486,7 +486,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleInput(event) {
-        GrassEAD.handleTextInputWithCursor(event.target, true);
+        GrassCCT.handleTextInputWithCursor(event.target, true);
         updateOutput();
     }
 
@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let result;
         if (currentMode === 'encrypt') {
             result = caesarEncrypt(text, currentShift);
-            result = GrassEAD.formatResult(result);
+            result = GrassCCT.formatResult(result);
         } else {
             const cleanText = text.replace(/\s/g, '');
             result = caesarDecrypt(cleanText, currentShift);
@@ -550,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('input', handleInput);
         input.addEventListener('paste', function (e) {
             setTimeout(() => {
-                GrassEAD.handleTextInputWithCursor(this, true);
+                GrassCCT.handleTextInputWithCursor(this, true);
                 updateOutput();
             }, 10);
         });
@@ -587,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let modded = ((val % 32) + 32) % 32;
                 if (modded > 31) modded = modded - 32;
                 this.value = modded;
-                GrassEAD.showMessage(`Shift đã được chuẩn hoá thành ${modded} (mod 32)`, 'info');
+                GrassCCT.showMessage(`Shift đã được chuẩn hoá thành ${modded} (mod 32)`, 'info');
                 updateShift(modded);
             } else {
                 updateShift(val);
@@ -654,21 +654,21 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pasteBtn) {
         pasteBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.pasteText(input);
+            GrassCCT.pasteText(input);
         });
     }
 
     if (copyInputBtn) {
         copyInputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(input.value);
+            GrassCCT.copyText(input.value);
         });
     }
 
     if (copyOutputBtn) {
         copyOutputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(output.value);
+            GrassCCT.copyText(output.value);
         });
     }
 
@@ -681,7 +681,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (output) {
                 output.value = '';
             }
-            GrassEAD.showMessage('Đã xoá nội dung!', 'info');
+            GrassCCT.showMessage('Đã xoá nội dung!', 'info');
             updateOutput();
         });
     }

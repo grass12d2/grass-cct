@@ -25,7 +25,7 @@ for (let row = 0; row < 6; row++) {
 const INVALID_PAIRS = ['63', '64', '65', '66'];
 
 function polybiusEncrypt(text) {
-    const processed = GrassEAD.processInput(text);
+    const processed = GrassCCT.processInput(text);
     let result = '';
     for (let char of processed) {
         if (charToCoords[char]) {
@@ -34,7 +34,7 @@ function polybiusEncrypt(text) {
             result += char;
         }
     }
-    return GrassEAD.formatPolybiusResult(result);
+    return GrassCCT.formatPolybiusResult(result);
 }
 
 function polybiusDecrypt(text) {
@@ -62,7 +62,7 @@ function getDetailItems() {
     const items = [];
 
     if (currentModeGlobal === 'encrypt') {
-        const processed = GrassEAD.processInput(text);
+        const processed = GrassCCT.processInput(text);
         for (let char of processed) {
             if (char === ' ') continue;
             const pair = charToCoords[char] || '';
@@ -364,21 +364,21 @@ document.addEventListener('DOMContentLoaded', function () {
         if (invalidLetters.length > 0) {
             const unique = [...new Set(invalidLetters)].slice(0, 5).join(', ').toUpperCase();
             const more = invalidLetters.length > 5 ? '...' : '';
-            GrassEAD.showMessage(
+            GrassCCT.showMessage(
                 `Ký tự chữ cái không hợp lệ đã bị loại bỏ: ${unique}${more}. Chỉ chấp nhận số 1-6.`,
                 'error'
             );
         } else if (invalidDigits.length > 0) {
             const unique = [...new Set(invalidDigits)].slice(0, 5).join(', ').toUpperCase();
             const more = invalidDigits.length > 5 ? '...' : '';
-            GrassEAD.showMessage(
+            GrassCCT.showMessage(
                 `Số "${unique}${more}" không hợp lệ. Chỉ chấp nhận số 1-6!`,
                 'error'
             );
         } else if (otherInvalid.length > 0) {
             const unique = [...new Set(otherInvalid)].slice(0, 5).join(', ').toUpperCase();
             const more = otherInvalid.length > 5 ? '...' : '';
-            GrassEAD.showMessage(
+            GrassCCT.showMessage(
                 `Ký tự không hợp lệ đã bị loại bỏ: ${unique}${more}. Chỉ chấp nhận số 1-6.`,
                 'error'
             );
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             updateOutput();
         } else {
-            GrassEAD.handleTextInputWithCursor(event.target, true);
+            GrassCCT.handleTextInputWithCursor(event.target, true);
             updateOutput();
         }
     }
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         this.setSelectionRange(newCursorPos, newCursorPos);
                     }
                 } else {
-                    GrassEAD.handleTextInputWithCursor(this, true);
+                    GrassCCT.handleTextInputWithCursor(this, true);
                 }
                 updateOutput();
             }, 10);
@@ -514,21 +514,21 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pasteBtn) {
         pasteBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.pasteText(input);
+            GrassCCT.pasteText(input);
         });
     }
 
     if (copyInputBtn) {
         copyInputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(input.value);
+            GrassCCT.copyText(input.value);
         });
     }
 
     if (copyOutputBtn) {
         copyOutputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(output.value);
+            GrassCCT.copyText(output.value);
         });
     }
 
@@ -541,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (output) {
                 output.value = '';
             }
-            GrassEAD.showMessage('Đã xoá nội dung!', 'info');
+            GrassCCT.showMessage('Đã xoá nội dung!', 'info');
             updateOutput();
         });
     }

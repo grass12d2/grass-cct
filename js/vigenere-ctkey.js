@@ -1,9 +1,9 @@
 // Mã hoá Vigenère với khoá là bản mã (Ciphertext Key)
 function vigenereCTKeyEncrypt(text, key = 'А') {
-    const processed = GrassEAD.processInput(text);
+    const processed = GrassCCT.processInput(text);
     let result = '';
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
-    const lower = GrassEAD.RUSSIAN_ALPHABET_LOWER;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
+    const lower = GrassCCT.RUSSIAN_ALPHABET_LOWER;
     const len = upper.length;
 
     let initialKey = key.toUpperCase();
@@ -46,8 +46,8 @@ function vigenereCTKeyEncrypt(text, key = 'А') {
 function vigenereCTKeyDecrypt(text, key = 'А') {
     const processed = text;
     let result = '';
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
-    const lower = GrassEAD.RUSSIAN_ALPHABET_LOWER;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
+    const lower = GrassCCT.RUSSIAN_ALPHABET_LOWER;
     const len = upper.length;
 
     let initialKey = key.toUpperCase();
@@ -89,7 +89,7 @@ function vigenereCTKeyDecrypt(text, key = 'А') {
 // Tạo bảng Gamma chi tiết cho Vigenère Ciphertext Key
 function generateCTKeyTable(text, key = 'А', isDecrypt = false) {
     const table = [];
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
 
     let cleanText = text.replace(/\s/g, '');
 
@@ -454,7 +454,7 @@ function updateCTKeyInfo(key) {
 
 // Kiểm tra ký tự hợp lệ cho khoá (chỉ А-Я)
 function isValidCTKeyChar(char) {
-    return GrassEAD.RUSSIAN_ALPHABET.includes(char.toUpperCase());
+    return GrassCCT.RUSSIAN_ALPHABET.includes(char.toUpperCase());
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleInput(event) {
-        GrassEAD.handleTextInputWithCursor(event.target, true);
+        GrassCCT.handleTextInputWithCursor(event.target, true);
         updateOutput();
     }
 
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let result;
         if (currentMode === 'encrypt') {
             result = vigenereCTKeyEncrypt(text, currentKeyValue);
-            result = GrassEAD.formatResult(result);
+            result = GrassCCT.formatResult(result);
         } else {
             const cleanText = text.replace(/\s/g, '');
             result = vigenereCTKeyDecrypt(cleanText, currentKeyValue);
@@ -567,7 +567,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (hasInvalidChar) {
             const uniqueInvalid = [...new Set(invalidChars)];
-            GrassEAD.showMessage(`Ký tự không hợp lệ trong khoá: ${uniqueInvalid.join(', ')}. Chỉ chấp nhận chữ cái А-Я`, 'error');
+            GrassCCT.showMessage(`Ký tự không hợp lệ trong khoá: ${uniqueInvalid.join(', ')}. Chỉ chấp nhận chữ cái А-Я`, 'error');
         }
 
         const finalKey = processed.toUpperCase().replace(/[^А-Я]/g, '');
@@ -597,7 +597,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('input', handleInput);
         input.addEventListener('paste', function (e) {
             setTimeout(() => {
-                GrassEAD.handleTextInputWithCursor(this, true);
+                GrassCCT.handleTextInputWithCursor(this, true);
                 updateOutput();
             }, 10);
         });
@@ -669,21 +669,21 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pasteBtn) {
         pasteBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.pasteText(input);
+            GrassCCT.pasteText(input);
         });
     }
 
     if (copyInputBtn) {
         copyInputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(input.value);
+            GrassCCT.copyText(input.value);
         });
     }
 
     if (copyOutputBtn) {
         copyOutputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(output.value);
+            GrassCCT.copyText(output.value);
         });
     }
 
@@ -696,7 +696,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (output) {
                 output.value = '';
             }
-            GrassEAD.showMessage('Đã xoá nội dung!', 'info');
+            GrassCCT.showMessage('Đã xoá nội dung!', 'info');
             const keyForTable = currentKey || 'А';
             const isDecrypt = currentMode === 'decrypt';
             renderCTKeyTable('', keyForTable, isDecrypt, isVertical);

@@ -140,8 +140,8 @@
 
             if (e.target.closest('#tool-clear')) {
                 localStorage.removeItem('theme');
-                if (window.GrassEAD && GrassEAD.showMessage) {
-                    GrassEAD.showMessage('Đã xoá dữ liệu tạm!', 'info');
+                if (window.GrassCCT && GrassCCT.showMessage) {
+                    GrassCCT.showMessage('Đã xoá dữ liệu tạm!', 'info');
                 }
                 return;
             }

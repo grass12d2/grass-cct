@@ -58,7 +58,7 @@ function handlePlayfairInputWithCursor(textarea, showAlert = true) {
     if (showAlert && invalidChars.size > 0) {
         const list = [...invalidChars].slice(0, 5).join(', ');
         const more = invalidChars.size > 5 ? '...' : '';
-        GrassEAD.showMessage(
+        GrassCCT.showMessage(
             `Ký tự không hợp lệ đã bị loại bỏ: ${list}${more}. Chỉ chấp nhận А-Я (trừ Ё, Й, Ъ) và dấu cách.`,
             'error'
         );
@@ -101,7 +101,7 @@ function handlePlayfairKeyInput(textarea, showAlert = true) {
     if (showAlert && invalidChars.length > 0) {
         const unique = [...new Set(invalidChars)].slice(0, 5).join(', ');
         const more = invalidChars.length > 5 ? '...' : '';
-        GrassEAD.showMessage(
+        GrassCCT.showMessage(
             `Ký tự không hợp lệ trong khoá: ${unique}${more}. Chỉ chấp nhận А-Я (trừ Ё, Й, Ъ).`,
             'error'
         );
@@ -530,7 +530,7 @@ function updatePartialResult() {
     const label = playfairState.mode === 'encrypt' ? 'Bản mã' : 'Bản rõ';
     el.innerHTML = `
         <span class="text-xs text-gray-500 dark:text-gray-400">${label} tích lũy:</span>
-        <span class="font-mono font-bold text-base text-blue-700 dark:text-blue-400 ml-2">${GrassEAD.formatResult(partial)}</span>
+        <span class="font-mono font-bold text-base text-blue-700 dark:text-blue-400 ml-2">${GrassCCT.formatResult(partial)}</span>
     `;
 }
 
@@ -631,7 +631,7 @@ function updatePlayfair() {
     }
 
     const fullResult = playfairState.digraphs.map(d => d.output.join('')).join('');
-    output.value = GrassEAD.formatResult(fullResult);
+    output.value = GrassCCT.formatResult(fullResult);
     renderStage();
 }
 
@@ -903,15 +903,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (pasteBtn) pasteBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        GrassEAD.pasteText(input);
+        GrassCCT.pasteText(input);
     });
     if (copyInputBtn) copyInputBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        GrassEAD.copyText(input.value);
+        GrassCCT.copyText(input.value);
     });
     if (copyOutputBtn) copyOutputBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        GrassEAD.copyText(output.value);
+        GrassCCT.copyText(output.value);
     });
     if (clearBtn) clearBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -919,7 +919,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (output) output.value = '';
         playfairState.currentStep = -1;
         pauseAnimation();
-        GrassEAD.showMessage('Đã xoá nội dung!', 'info');
+        GrassCCT.showMessage('Đã xoá nội dung!', 'info');
         updatePlayfair();
     });
 

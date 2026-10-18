@@ -1,7 +1,7 @@
 // ==================== MÃ HOÁ / GIẢI MÃ ====================
 
 function trithemiusEncrypt(text) {
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     let cleanInput = '';
     for (let char of text.toUpperCase()) {
         if (upper.includes(char)) {
@@ -24,7 +24,7 @@ function trithemiusEncrypt(text) {
 }
 
 function trithemiusDecrypt(text) {
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     let cleanInput = '';
     for (let char of text.toUpperCase()) {
         if (upper.includes(char)) {
@@ -54,7 +54,7 @@ function getDetailItems() {
     const text = input.value;
     if (!text || text.trim() === '') return [];
 
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     const len = upper.length;
     const items = [];
 
@@ -261,7 +261,7 @@ function renderBaseTable(isDecrypt) {
     const container = document.getElementById('trithemius-table');
     if (!container) return;
 
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
 
     let html = `
         <div class="overflow-auto max-h-[600px] pb-2">
@@ -317,7 +317,7 @@ function renderBaseTable(isDecrypt) {
 }
 
 function updateTrithemiusTable(text, isDecrypt) {
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     let cleanText = '';
     for (let char of text.toUpperCase()) {
         if (upper.includes(char)) {
@@ -339,7 +339,7 @@ function renderHighlightedTable(isDecrypt, cleanText) {
     const container = document.getElementById('trithemius-table');
     if (!container) return;
 
-    const upper = GrassEAD.RUSSIAN_ALPHABET;
+    const upper = GrassCCT.RUSSIAN_ALPHABET;
     const len = upper.length;
 
     // Màu highlight: mã hoá = cam (nóng), giải mã = xanh lá
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleInput(event) {
-        GrassEAD.handleTextInputWithCursor(event.target, true);
+        GrassCCT.handleTextInputWithCursor(event.target, true);
         updateOutput();
     }
 
@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let result;
         if (currentMode === 'encrypt') {
             result = trithemiusEncrypt(text);
-            result = GrassEAD.formatResult(result);
+            result = GrassCCT.formatResult(result);
         } else {
             result = trithemiusDecrypt(text);
         }
@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('input', handleInput);
         input.addEventListener('paste', function (e) {
             setTimeout(() => {
-                GrassEAD.handleTextInputWithCursor(this, true);
+                GrassCCT.handleTextInputWithCursor(this, true);
                 updateOutput();
             }, 10);
         });
@@ -563,21 +563,21 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pasteBtn) {
         pasteBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.pasteText(input);
+            GrassCCT.pasteText(input);
         });
     }
 
     if (copyInputBtn) {
         copyInputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(input.value);
+            GrassCCT.copyText(input.value);
         });
     }
 
     if (copyOutputBtn) {
         copyOutputBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            GrassEAD.copyText(output.value);
+            GrassCCT.copyText(output.value);
         });
     }
 
@@ -590,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (output) {
                 output.value = '';
             }
-            GrassEAD.showMessage('Đã xoá nội dung!', 'info');
+            GrassCCT.showMessage('Đã xoá nội dung!', 'info');
             updateOutput();
         });
     }

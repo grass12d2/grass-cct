@@ -194,7 +194,7 @@ function prepareCardanoInput(text) {
             result += 'Е';
         } else if (char === '–' || char === '-' || char === '—') {
             result += PAD_CHAR;
-        } else if (GrassEAD.RUSSIAN_ALPHABET.includes(char)) {
+        } else if (GrassCCT.RUSSIAN_ALPHABET.includes(char)) {
             result += char;
         }
     }
@@ -387,7 +387,7 @@ function updateCardanoOutput() {
     if (currentModeGlobal === 'encrypt') {
         const result = cardanoEncrypt(text, cardanoTemplate);
         currentCardanoResult = result;
-        output.value = GrassEAD.formatResult(result.ciphertext);
+        output.value = GrassCCT.formatResult(result.ciphertext);
     } else {
         const result = cardanoDecrypt(text, cardanoTemplate);
         currentCardanoResult = result;
@@ -516,7 +516,7 @@ function processCardanoRectInput(text) {
             const upper = char.toUpperCase();
             if (upper === 'Ё') {
                 result += 'Е';
-            } else if (GrassEAD.RUSSIAN_ALPHABET.includes(upper)) {
+            } else if (GrassCCT.RUSSIAN_ALPHABET.includes(upper)) {
                 result += upper;
             } else {
                 invalidChars.add(char);
@@ -534,7 +534,7 @@ function handleCardanoRectInputWithCursor(textarea, showAlert = true) {
     if (showAlert && invalidChars.size > 0) {
         const list = [...invalidChars].slice(0, 5).join(', ');
         const more = invalidChars.size > 5 ? '...' : '';
-        GrassEAD.showMessage(
+        GrassCCT.showMessage(
             `Ký tự không hợp lệ đã bị loại bỏ: ${list}${more}. Chỉ chấp nhận А-Я, dấu cách, và '-'.`,
             'error'
         );
@@ -618,27 +618,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (newTemplateBtn) newTemplateBtn.addEventListener('click', function () {
         regenerateCardanoTemplate();
-        GrassEAD.showMessage('Đã tạo template mới!', 'success');
+        GrassCCT.showMessage('Đã tạo template mới!', 'success');
         resetCardanoAnimation();
     });
 
     if (pasteBtn) pasteBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        GrassEAD.pasteText(input).then(() => {
+        GrassCCT.pasteText(input).then(() => {
             if (input) {
                 handleCardanoRectInputWithCursor(input);
                 updateCardanoOutput();
             }
         });
     });
-    if (copyInputBtn) copyInputBtn.addEventListener('click', (e) => { e.preventDefault(); GrassEAD.copyText(input.value); });
-    if (copyOutputBtn) copyOutputBtn.addEventListener('click', (e) => { e.preventDefault(); GrassEAD.copyText(output.value); });
+    if (copyInputBtn) copyInputBtn.addEventListener('click', (e) => { e.preventDefault(); GrassCCT.copyText(input.value); });
+    if (copyOutputBtn) copyOutputBtn.addEventListener('click', (e) => { e.preventDefault(); GrassCCT.copyText(output.value); });
     if (clearBtn) clearBtn.addEventListener('click', function (e) {
         e.preventDefault();
         if (input) input.value = '';
         if (output) output.value = '';
         currentCardanoResult = null;
-        GrassEAD.showMessage('Đã xoá nội dung!', 'info');
+        GrassCCT.showMessage('Đã xoá nội dung!', 'info');
         updateCardanoOutput();
         resetCardanoAnimation();
     });
@@ -656,7 +656,7 @@ document.addEventListener('DOMContentLoaded', function () {
             updateCardanoOutput();
             resetCardanoAnimation();
         }
-        GrassEAD.showMessage('Đã về template & thứ tự mặc định!', 'info');
+        GrassCCT.showMessage('Đã về template & thứ tự mặc định!', 'info');
     });
 
     const animPrevBtn = document.getElementById('anim-prev');
@@ -985,7 +985,7 @@ async function playCardanoAnimation() {
     const isDecrypt = currentModeGlobal === 'decrypt';
 
     if (!text || !text.trim()) {
-        GrassEAD.showMessage('Nhập văn bản trước khi chạy hoạt ảnh!', 'warning');
+        GrassCCT.showMessage('Nhập văn bản trước khi chạy hoạt ảnh!', 'warning');
         return;
     }
     if (animPlaying) return;
@@ -1415,7 +1415,7 @@ function applyCustomTemplate() {
     const cols = cardanoGridCols;
     const required = (rows * cols) / 4;
     if (editorSelection.size !== required) {
-        GrassEAD.showMessage(
+        GrassCCT.showMessage(
             `Cần chọn đúng ${required} ô — bạn đang chọn ${editorSelection.size}`,
             'warning'
         );
@@ -1430,5 +1430,5 @@ function applyCustomTemplate() {
     updateCardanoOutput();
     resetCardanoAnimation();
     closeCustomEditor();
-    GrassEAD.showMessage('Đã áp dụng template tự khoét!', 'success');
+    GrassCCT.showMessage('Đã áp dụng template tự khoét!', 'success');
 }

@@ -365,11 +365,11 @@
             });
             navbarPh.classList.add('sticky', 'top-0', 'z-40');
 
-            // ===== Brand superscript: EAD ↔ Encrypt And Decrypt theo viewport =====
+            // ===== Brand superscript: CCT ↔ Classical Cryptography Tools theo viewport =====
             function updateBrandText() {
                 const el = navbarPh.querySelector('#navbar-brand-sup');
                 if (!el) return;
-                el.textContent = window.innerWidth >= 900 ? 'Encrypt And Decrypt' : 'EAD';
+                el.textContent = window.innerWidth >= 900 ? 'Classical Cryptography Tools' : 'CCT';
             }
             updateBrandText();
             window.addEventListener('resize', updateBrandText);
